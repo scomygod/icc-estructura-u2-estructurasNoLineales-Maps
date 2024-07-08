@@ -28,7 +28,26 @@ public class Ejercicios {
      * frecuencia.
      */
     public static boolean areAnagrams(String str1, String str2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        // Si el length no es igual, no pueden ser anagramas
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        // Mapas para contar los chars
+        HashMap<Character, Integer> count1 = new HashMap<>();
+        HashMap<Character, Integer> count2 = new HashMap<>();
+
+        // Iterar sobre los chars
+        for (char c : str1.toCharArray()){
+            count1.put(c, count1.getOrDefault(c, 0) + 1);
+        }
+
+        for (char c : str2.toCharArray()) {
+            count2.put(c, count2.getOrDefault(c, 0) + 1);
+        }
+
+        // Comparar los dos mapas
+        return count1.equals(count2);
 
     }
 
@@ -48,6 +67,22 @@ public class Ejercicios {
      * Output: null
      */
     public int[] sumatoriaDeDos(int[] nums, int objetivo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        // Mapa para los números e índices
+        HashMap<Integer, Integer> numMap = new HashMap<>();
+
+        // Iterar sobre el array de números
+        for (int i = 0; i < nums.length; i++) {
+
+            // Operacion que calcula el complemento 
+            int complement = objetivo - nums[i];
+
+            // Verificar si el complemento ya está en el mapa
+            if (numMap.containsKey(complement)) {
+                return new int[]{numMap.get(complement), i}; // Si está, retornar el número actual y su complemento
+            }
+            numMap.put(nums[i], i); // Si no, agregar el número actual y su índice
+        }
+        return null; // Si no hay,  null
     }
 }
